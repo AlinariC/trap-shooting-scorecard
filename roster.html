@@ -8,6 +8,22 @@
   <link rel="manifest" href="manifest.json" />
 </head>
 <body class="dark-theme">
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBvEwTG-09kfBQ2CWlvov7puqew9jWuThQ",
+      authDomain: "reedsport-trap-shooters.firebaseapp.com",
+      projectId: "reedsport-trap-shooters",
+      storageBucket: "reedsport-trap-shooters.appspot.com",
+      messagingSenderId: "963218553000",
+      appId: "1:963218553000:web:b1d3fcfc75988d8e906a9d",
+      databaseURL: "https://reedsport-trap-shooters-default-rtdb.firebaseio.com"
+    };
+
+    const app = firebase.initializeApp(firebaseConfig);
+    window.db = firebase.database();
+  </script>
   <div id="site-header"></div>
   <script src="header.js"></script>
   <main>
@@ -20,6 +36,11 @@
           <path d="M12 5v14m-7-7h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </button>
+    </div>
+
+    <div id="shooterListBlock" class="shooter-block">
+      <h3>Current Shooters:</h3>
+      <ul id="shooterList"></ul>
     </div>
 
     <div id="rosterList" class="shooter-block">
@@ -43,26 +64,6 @@
       <ul id="coachList"></ul>
     </div>
   </main>
-
-  <!-- Firebase SDK -->
-
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getDatabase } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyBvEwTG-09kfBQ2CWlvov7puqew9jWuThQ",
-      authDomain: "reedsport-trap-shooters.firebaseapp.com",
-      projectId: "reedsport-trap-shooters",
-      storageBucket: "reedsport-trap-shooters.appspot.com",
-      messagingSenderId: "963218553000",
-      appId: "1:963218553000:web:b1d3fcfc75988d8e906a9d",
-      databaseURL: "https://reedsport-trap-shooters-default-rtdb.firebaseio.com"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    window.db = getDatabase(app);
-  </script>
   <script src="script.js"></script>
   <div id="toast" class="toast"></div>
 </body>
