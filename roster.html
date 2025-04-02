@@ -8,22 +8,6 @@
   <link rel="manifest" href="manifest.json" />
 </head>
 <body class="dark-theme">
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js"></script>
-  <script>
-    const firebaseConfig = {
-      apiKey: "AIzaSyBvEwTG-09kfBQ2CWlvov7puqew9jWuThQ",
-      authDomain: "reedsport-trap-shooters.firebaseapp.com",
-      projectId: "reedsport-trap-shooters",
-      storageBucket: "reedsport-trap-shooters.appspot.com",
-      messagingSenderId: "963218553000",
-      appId: "1:963218553000:web:b1d3fcfc75988d8e906a9d",
-      databaseURL: "https://reedsport-trap-shooters-default-rtdb.firebaseio.com"
-    };
-
-    const app = firebase.initializeApp(firebaseConfig);
-    window.db = firebase.database();
-  </script>
   <div id="site-header"></div>
   <script src="header.js"></script>
   <main>
@@ -59,7 +43,23 @@
       <ul id="coachList"></ul>
     </div>
   </main>
-  <script src="script.js"></script>
   <div id="toast" class="toast"></div>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBvEwTG-09kfBQ2CWlvov7puqew9jWuThQ",
+      authDomain: "reedsport-trap-shooters.firebaseapp.com",
+      projectId: "reedsport-trap-shooters",
+      storageBucket: "reedsport-trap-shooters.appspot.com",
+      messagingSenderId: "963218553000",
+      appId: "1:963218553000:web:b1d3fcfc75988d8e906a9d",
+      databaseURL: "https://reedsport-trap-shooters-default-rtdb.firebaseio.com"
+    };
+
+    const app = firebase.initializeApp(firebaseConfig);
+    window.db = firebase.database();
+  </script>
+  <script src="script.js"></script>
 </body>
 </html>
