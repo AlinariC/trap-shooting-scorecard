@@ -80,13 +80,21 @@
     function addName() {
       const newName = document.getElementById('newName').value.trim();
       if (!newName) return alert('Please enter a name.');
-      db.ref('roster').once('value', snapshot => {
-        const list = snapshot.val() || [];
-        list.push(newName);
-        db.ref('roster').set(list);
-        document.getElementById('newName').value = '';
-        loadRosterList();
-      });
+      
+      db.ref('roster').once('value')
+        .then(snapshot => {
+          const list = snapshot.val() || [];
+          list.push(newName);
+          return db.ref('roster').set(list);
+        })
+        .then(() => {
+          document.getElementById('newName').value = '';
+          loadRosterList();
+        })
+        .catch(error => {
+          console.error("Error adding name to Firebase:", error);
+          alert("Something went wrong while saving the name.");
+        });
     }
 
     window.onload = loadRosterList;
