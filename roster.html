@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reedsport Trap Shooters - Roster</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="dark-theme">
+  <header>
+    <img src="logo.jpg" alt="Reedsport Logo" class="logo"/>
+    <h1>Reedsport Trap Shooters</h1>
+    <nav>
+      <a href="index.html">Scorecard</a>
+      <a href="roster.html" class="active">Roster</a>
+      <a href="results.html">Results</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Manage Roster</h2>
+    <div class="controls">
+      <label>Add Name:
+        <input type="text" id="newName" />
+      </label>
+      <button onclick="addName()">Add</button>
+    </div>
+
+    <div id="rosterList" class="shooter-block">
+      <h3>Current Roster:</h3>
+      <ul id="nameList"></ul>
+    </div>
+  </main>
+
+  <script>
+    function loadRosterList() {
+      const list = JSON.parse(localStorage.getItem('trapRoster') || '[]');
+      const ul = document.getElementById('nameList');
+      ul.innerHTML = '';
+      list.forEach((name, index) => {
+        const li = document.createElement('li');
+        li.textContent = name + ' ';
+        const removeBtn = document.createElement('button');
+        removeBtn.textContent = 'Remove';
+        removeBtn.onclick = () => {
+          list.splice(index, 1);
+          localStorage.setItem('trapRoster', JSON.stringify(list));
+          loadRosterList();
+        };
+        li.appendChild(removeBtn);
+        ul.appendChild(li);
+      });
+    }
+
+    function addName() {
+      const newName = document.getElementById('newName').value.trim();
+      if (!newName) return alert('Please enter a name.');
+      const list = JSON.parse(localStorage.getItem('trapRoster') || '[]');
+      list.push(newName);
+      localStorage.setItem('trapRoster', JSON.stringify(list));
+      document.getElementById('newName').value = '';
+      loadRosterList();
+    }
+
+    window.onload = loadRosterList;
+  </script>
+</body>
+</html>

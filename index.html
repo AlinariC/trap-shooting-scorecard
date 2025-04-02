@@ -1,1 +1,56 @@
-<!-- Final index.html will go here -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reedsport Trap Shooters - Scorecard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="dark-theme">
+  <header>
+    <img src="logo.jpg" alt="Reedsport Logo" class="logo"/>
+    <h1>Reedsport Trap Shooters</h1>
+    <nav>
+      <a href="index.html" class="active">Scorecard</a>
+      <a href="roster.html">Roster</a>
+      <a href="results.html">Results</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="controls">
+      <label>Date:
+        <input type="date" id="eventDate" />
+      </label>
+      <label>Field #:
+        <input type="text" id="fieldNumber" />
+      </label>
+      <label>Scorekeeper:
+        <input type="text" id="scorekeeper" />
+      </label>
+      <label>Team:
+        <input type="text" id="teamName" />
+      </label>
+      <label>Shooters:
+        <select id="shooterCount" onchange="renderScorecard()">
+          <option value="1">1 Shooter</option>
+          <option value="2">2 Shooters</option>
+          <option value="3">3 Shooters</option>
+          <option value="4">4 Shooters</option>
+          <option value="5">5 Shooters</option>
+        </select>
+      </label>
+    </div>
+
+    <div id="scorecardContainer"></div>
+
+    <div class="actions">
+      <button onclick="saveScorecard()">Save</button>
+      <button onclick="window.print()">Print</button>
+      <button onclick="resetScorecard()">Clear</button>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
