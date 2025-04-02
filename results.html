@@ -45,7 +45,7 @@
     apiKey: "AIzaSyBvEwTG-09kfBQ2CWlvov7puqew9jWuThQ",
     authDomain: "reedsport-trap-shooters.firebaseapp.com",
     projectId: "reedsport-trap-shooters",
-    storageBucket: "reedsport-trap-shooters.firebasestorage.app",
+    storageBucket: "reedsport-trap-shooters.appspot.com",
     messagingSenderId: "963218553000",
     appId: "1:963218553000:web:b1d3fcfc75988d8e906a9d"
   };
@@ -58,7 +58,7 @@
     const filterDate = document.getElementById('filterDate').value;
     container.innerHTML = '';
 
-    firebase.database().ref('scores').once('value', snapshot => {
+    db.ref('scores').once('value', snapshot => {
       const results = snapshot.val() || [];
       const filtered = filterDate
         ? results.filter(r => r.date === filterDate)
@@ -95,7 +95,7 @@
 
   function clearResults() {
     if (confirm("Are you sure you want to delete all saved results?")) {
-      firebase.database().ref('scores').remove().then(() => renderResults());
+      db.ref('scores').remove().then(() => renderResults());
     }
   }
 

@@ -81,10 +81,10 @@ function saveScorecard() {
   });
 
   // Push the data to Firebase
-  firebase.database().ref('scores').once('value', snapshot => {
+  db.ref('scores').once('value', snapshot => {
     const scores = snapshot.val() || [];
     scores.push(data);
-    firebase.database().ref('scores').set(scores);
+    db.ref('scores').set(scores);
     alert('Scorecard saved to Firebase!');
   });
 }
@@ -100,7 +100,7 @@ function resetScorecard() {
 function loadRoster(selectId) {
   const select = document.getElementById(selectId);
   select.innerHTML = '<option value="">-- Select Shooter --</option>';
-  firebase.database().ref('roster').once('value', snapshot => {
+  db.ref('roster').once('value', snapshot => {
     const list = snapshot.val() || [];
     list.forEach(name => {
       const option = document.createElement('option');

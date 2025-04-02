@@ -48,7 +48,7 @@
       apiKey: "AIzaSyBvEwTG-09kfBQ2CWlvov7puqew9jWuThQ",
       authDomain: "reedsport-trap-shooters.firebaseapp.com",
       projectId: "reedsport-trap-shooters",
-      storageBucket: "reedsport-trap-shooters.firebasestorage.app",
+      storageBucket: "reedsport-trap-shooters.appspot.com",
       messagingSenderId: "963218553000",
       appId: "1:963218553000:web:b1d3fcfc75988d8e906a9d"
     };
@@ -59,7 +59,7 @@
     function loadRosterList() {
       const ul = document.getElementById('nameList');
       ul.innerHTML = '';
-      firebase.database().ref('roster').once('value', snapshot => {
+      db.ref('roster').once('value', snapshot => {
         const list = snapshot.val() || [];
         list.forEach((name, index) => {
           const li = document.createElement('li');
@@ -68,7 +68,7 @@
           removeBtn.textContent = 'Remove';
           removeBtn.onclick = () => {
             list.splice(index, 1);
-            firebase.database().ref('roster').set(list);
+            db.ref('roster').set(list);
             loadRosterList();
           };
           li.appendChild(removeBtn);
@@ -80,10 +80,10 @@
     function addName() {
       const newName = document.getElementById('newName').value.trim();
       if (!newName) return alert('Please enter a name.');
-      firebase.database().ref('roster').once('value', snapshot => {
+      db.ref('roster').once('value', snapshot => {
         const list = snapshot.val() || [];
         list.push(newName);
-        firebase.database().ref('roster').set(list);
+        db.ref('roster').set(list);
         document.getElementById('newName').value = '';
         loadRosterList();
       });
