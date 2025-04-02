@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Reedsport Trap Shooters - Roster</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('serviceWorker.js')
+      .then(() => console.log("SW registered"))
+      .catch(err => console.error("SW failed", err));
+  }
+</script>
 </head>
 <body class="dark-theme">
   <header>
@@ -31,34 +39,54 @@
     </div>
   </main>
 
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+
   <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBvEwTG-09kfBQ2CWlvov7puqew9jWuThQ",
+      authDomain: "reedsport-trap-shooters.firebaseapp.com",
+      projectId: "reedsport-trap-shooters",
+      storageBucket: "reedsport-trap-shooters.firebasestorage.app",
+      messagingSenderId: "963218553000",
+      appId: "1:963218553000:web:b1d3fcfc75988d8e906a9d"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
     function loadRosterList() {
-      const list = JSON.parse(localStorage.getItem('trapRoster') || '[]');
       const ul = document.getElementById('nameList');
       ul.innerHTML = '';
-      list.forEach((name, index) => {
-        const li = document.createElement('li');
-        li.textContent = name + ' ';
-        const removeBtn = document.createElement('button');
-        removeBtn.textContent = 'Remove';
-        removeBtn.onclick = () => {
-          list.splice(index, 1);
-          localStorage.setItem('trapRoster', JSON.stringify(list));
-          loadRosterList();
-        };
-        li.appendChild(removeBtn);
-        ul.appendChild(li);
+      firebase.database().ref('roster').once('value', snapshot => {
+        const list = snapshot.val() || [];
+        list.forEach((name, index) => {
+          const li = document.createElement('li');
+          li.textContent = name + ' ';
+          const removeBtn = document.createElement('button');
+          removeBtn.textContent = 'Remove';
+          removeBtn.onclick = () => {
+            list.splice(index, 1);
+            firebase.database().ref('roster').set(list);
+            loadRosterList();
+          };
+          li.appendChild(removeBtn);
+          ul.appendChild(li);
+        });
       });
     }
 
     function addName() {
       const newName = document.getElementById('newName').value.trim();
       if (!newName) return alert('Please enter a name.');
-      const list = JSON.parse(localStorage.getItem('trapRoster') || '[]');
-      list.push(newName);
-      localStorage.setItem('trapRoster', JSON.stringify(list));
-      document.getElementById('newName').value = '';
-      loadRosterList();
+      firebase.database().ref('roster').once('value', snapshot => {
+        const list = snapshot.val() || [];
+        list.push(newName);
+        firebase.database().ref('roster').set(list);
+        document.getElementById('newName').value = '';
+        loadRosterList();
+      });
     }
 
     window.onload = loadRosterList;

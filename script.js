@@ -80,10 +80,13 @@ function saveScorecard() {
     data.shooters.push(shooter);
   });
 
-  const scores = JSON.parse(localStorage.getItem('trapScores') || '[]');
-  scores.push(data);
-  localStorage.setItem('trapScores', JSON.stringify(scores));
-  alert('Scorecard saved!');
+  // Push the data to Firebase
+  firebase.database().ref('scores').once('value', snapshot => {
+    const scores = snapshot.val() || [];
+    scores.push(data);
+    firebase.database().ref('scores').set(scores);
+    alert('Scorecard saved to Firebase!');
+  });
 }
 
 function resetScorecard() {
@@ -95,14 +98,16 @@ function resetScorecard() {
 }
 
 function loadRoster(selectId) {
-  const list = JSON.parse(localStorage.getItem('trapRoster') || '[]');
   const select = document.getElementById(selectId);
   select.innerHTML = '<option value="">-- Select Shooter --</option>';
-  list.forEach(name => {
-    const option = document.createElement('option');
-    option.value = name;
-    option.textContent = name;
-    select.appendChild(option);
+  firebase.database().ref('roster').once('value', snapshot => {
+    const list = snapshot.val() || [];
+    list.forEach(name => {
+      const option = document.createElement('option');
+      option.value = name;
+      option.textContent = name;
+      select.appendChild(option);
+    });
   });
 }
 

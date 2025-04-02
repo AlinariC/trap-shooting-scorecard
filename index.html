@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Reedsport Trap Shooters - Scorecard</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('serviceWorker.js')
+      .then(() => console.log("SW registered"))
+      .catch(err => console.error("SW failed", err));
+  }
+  </script>
 </head>
 <body class="dark-theme">
   <header>
@@ -50,6 +58,24 @@
     </div>
   </main>
 
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBvEwTG-09kfBQ2CWlvov7puqew9jWuThQ",
+      authDomain: "reedsport-trap-shooters.firebaseapp.com",
+      projectId: "reedsport-trap-shooters",
+      storageBucket: "reedsport-trap-shooters.firebasestorage.app",
+      messagingSenderId: "963218553000",
+      appId: "1:963218553000:web:b1d3fcfc75988d8e906a9d"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+  </script>
+  
   <script src="script.js"></script>
 </body>
 </html>
