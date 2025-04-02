@@ -148,3 +148,20 @@ body.dark-theme {
 .toast.show {
   opacity: 1;
 }
+
+button[title="Add Name"],
+button[title="Remove Name"] {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #f44336;
+  transition: transform 0.2s ease-in-out;
+  padding: 0.25rem;
+}
+
+button[title="Add Name"]:hover,
+button[title="Remove Name"]:hover {
+  transform: scale(1.2);
+  color: #ff6659;
+}
