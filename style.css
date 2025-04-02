@@ -281,15 +281,16 @@ button[title="Remove Name"]:hover {
 
 .score-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
-  gap: 6px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
   width: 100%;
+  justify-items: center;
 }
 
 .score-grid .score-cell {
-  width: 40px;
-  height: 40px;
-  font-size: 1.1rem;
+  width: 36px;
+  height: 36px;
+  font-size: 1rem;
 }
 
 .total-display {
