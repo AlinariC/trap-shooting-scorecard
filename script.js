@@ -97,7 +97,7 @@ window.onload = () => {
   if (document.getElementById('coachList')) {
     loadCoachList();
   }
-  if (document.getElementById('shooterCount')) {
-    renderScorecard?.();
+  if (document.getElementById('shooterCount') && typeof renderScorecard === 'function') {
+    renderScorecard();
   }
 };
