@@ -65,10 +65,11 @@
           li.textContent = name + ' ';
           const removeBtn = document.createElement('button');
           removeBtn.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
-              <path fill="#ff3b30" d="M3 6h18M8 6v12a2 2 0 002 2h4a2 2 0 002-2V6m-6-3h4a1 1 0 011 1v1H8V4a1 1 0 011-1z" />
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+              <path fill="#ff3b30" d="M6 19a2 2 0 002 2h8a2 2 0 002-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
             </svg>`;
           removeBtn.classList.add('icon-button');
+          removeBtn.style.marginLeft = '0.5rem';
           removeBtn.title = 'Remove Name';
           removeBtn.removeAttribute('style');
           removeBtn.onclick = () => {
