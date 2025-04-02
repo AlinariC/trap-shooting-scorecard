@@ -30,7 +30,7 @@
       <label>Add Name:
         <input type="text" id="newName" />
       </label>
-      <button onclick="addName()">Add</button>
+      <button onclick="addName()" title="Add Name">➕</button>
     </div>
 
     <div id="rosterList" class="shooter-block">
@@ -56,6 +56,15 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2000);
+    }
+
     function loadRosterList() {
       const ul = document.getElementById('nameList');
       ul.innerHTML = '';
@@ -65,11 +74,14 @@
           const li = document.createElement('li');
           li.textContent = name + ' ';
           const removeBtn = document.createElement('button');
-          removeBtn.textContent = 'Remove';
+          removeBtn.textContent = '🗑️';
+          removeBtn.title = 'Remove Name';
           removeBtn.onclick = () => {
             list.splice(index, 1);
-            db.ref('roster').set(list);
-            loadRosterList();
+            db.ref('roster').set(list).then(() => {
+              loadRosterList();
+              showToast("✓ Name removed");
+            });
           };
           li.appendChild(removeBtn);
           ul.appendChild(li);
@@ -90,6 +102,7 @@
         .then(() => {
           document.getElementById('newName').value = '';
           loadRosterList();
+          showToast("✓ Name added");
         })
         .catch(error => {
           console.error("Error adding name to Firebase:", error);
@@ -99,5 +112,7 @@
 
     window.onload = loadRosterList;
   </script>
+  
+  <div id="toast" class="toast"></div>
 </body>
 </html>
