@@ -6,23 +6,10 @@
   <title>Reedsport Trap Shooters - Results</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="manifest" href="manifest.json" />
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('serviceWorker.js')
-      .then(() => console.log("SW registered"))
-      .catch(err => console.error("SW failed", err));
-  }
-</script>
 </head>
 <body class="dark-theme">
-  <header>
-    <img src="logo-new.png" alt="Reedsport Trap Shooters Logo" class="logo" style="width: 320px;" />
-    <nav>
-      <a href="index.html">Scorecard</a>
-      <a href="roster.html">Roster</a>
-      <a href="results.html" class="active">Results</a>
-    </nav>
-  </header>
+  <div id="site-header"></div>
+  <script src="header.js"></script>
 
   <main>
     <h2>Saved Scorecards</h2>
