@@ -62,14 +62,15 @@
         const list = snapshot.val() || [];
         list.forEach((name, index) => {
           const li = document.createElement('li');
+          li.style.marginBottom = '0.4rem';
           li.textContent = name + ' ';
           const removeBtn = document.createElement('button');
           removeBtn.innerHTML = `
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
               <path fill="#ff3b30" d="M6 19a2 2 0 002 2h8a2 2 0 002-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
             </svg>`;
           removeBtn.classList.add('icon-button');
-          removeBtn.style.cssText = 'margin-left: 0.5rem; vertical-align: middle; display: inline-flex; align-items: center;';
+          removeBtn.style.cssText = 'margin-left: 0.5rem; display: inline-flex; align-items: flex-end;';
           removeBtn.title = 'Remove Name';
           removeBtn.onclick = () => {
             list.splice(index, 1);
