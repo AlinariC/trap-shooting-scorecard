@@ -155,3 +155,35 @@ function removeShooter(name) {
     loadRosterList();
   });
 }
+
+function loadCoachList() {
+  const listElement = document.getElementById('coachList');
+  if (!listElement) return;
+  listElement.innerHTML = '';
+  db.ref('coaches').once('value', snapshot => {
+    const list = snapshot.val() || [];
+    list.forEach(name => {
+      const li = document.createElement('li');
+      li.textContent = name;
+      const removeBtn = document.createElement('button');
+      removeBtn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24">
+          <path fill="#ff3b30" d="M6 19a2 2 0 002 2h8a2 2 0 002-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+        </svg>`;
+      removeBtn.classList.add('icon-button');
+      removeBtn.style.cssText = 'margin-left: 0.5rem; vertical-align: middle;';
+      removeBtn.onclick = () => removeCoach(name);
+      li.appendChild(removeBtn);
+      listElement.appendChild(li);
+    });
+  });
+}
+
+function removeCoach(name) {
+  db.ref('coaches').once('value', snapshot => {
+    const list = snapshot.val() || [];
+    const updated = list.filter(n => n !== name);
+    db.ref('coaches').set(updated);
+    loadCoachList();
+  });
+}
