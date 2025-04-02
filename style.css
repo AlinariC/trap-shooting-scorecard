@@ -149,19 +149,32 @@ body.dark-theme {
   opacity: 1;
 }
 
-button[title="Add Name"],
+button[title="Add Name"] {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #4caf50;
+  transition: transform 0.2s ease-in-out;
+  padding: 0.25rem;
+}
+
+button[title="Add Name"]:hover {
+  transform: scale(1.2);
+  color: #81c784;
+}
+
 button[title="Remove Name"] {
   font-size: 1.5rem;
   background: none;
   border: none;
   cursor: pointer;
-  color: #f44336;
+  color: #ff4444;
   transition: transform 0.2s ease-in-out;
   padding: 0.25rem;
 }
 
-button[title="Add Name"]:hover,
 button[title="Remove Name"]:hover {
   transform: scale(1.2);
-  color: #ff6659;
+  color: #ff6e6e;
 }
