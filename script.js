@@ -27,6 +27,12 @@ function renderScorecard() {
       const shooterCell = document.createElement('td');
       const select = document.createElement('select');
       select.name = `shooter-${i}`;
+      
+      const blankOption = document.createElement('option');
+      blankOption.value = '';
+      blankOption.textContent = '';
+      select.appendChild(blankOption);
+      
       shooters.forEach(name => {
         const option = document.createElement('option');
         option.value = name;
