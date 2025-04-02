@@ -93,10 +93,19 @@ function renderScorecard() {
   });
 }
 
-if (document.getElementById('shooterCount')) {
-  window.onload = () => {
-    document.getElementById('shooterCount').value = '1';
+window.onload = () => {
+  const shooterCountSelect = document.getElementById('shooterCount');
+  if (shooterCountSelect) {
+    shooterCountSelect.value = '1';
     renderScorecard();
-    document.getElementById('shooterCount').addEventListener('change', renderScorecard);
-  };
-}
+    shooterCountSelect.addEventListener('change', renderScorecard);
+  }
+
+  if (document.getElementById('shooterList')) {
+    loadRosterList();
+  }
+
+  if (document.getElementById('coachList')) {
+    loadCoachList();
+  }
+};
