@@ -40,6 +40,24 @@
       font-weight: bold;
     }
 
+    .shooter-block {
+      margin-bottom: 1rem;
+    }
+
+    .shooter-row {
+      display: flex;
+      align-items: center;
+    }
+
+    .shooter-select {
+      margin-right: 10px;
+    }
+
+    .total-display {
+      margin-left: 10px;
+      font-weight: bold;
+    }
+
     @media (max-width: 768px) {
       .scorecard-table {
         font-size: 0.65rem;
@@ -91,7 +109,7 @@
       </label>
     </div>
 
-    <div id="scorecardContainer" style="overflow-x: auto;"></div>
+    <div id="scorecardContainer"></div>
 
     <div class="actions">
       <button onclick="saveScorecard()">Save</button>
@@ -125,52 +143,35 @@
       db.ref('roster').once('value', snapshot => {
         const shooters = snapshot.val() || [];
 
-        const table = document.createElement('table');
-        table.classList.add('scorecard-table');
-
-        // Table header
-        const header = document.createElement('tr');
-        header.innerHTML = `<th>Shooter</th>`;
-        for (let i = 1; i <= 25; i++) {
-          const th = document.createElement('th');
-          th.textContent = `R${i}`;
-          header.appendChild(th);
-        }
-        header.innerHTML += `<th>Total</th>`;
-        table.appendChild(header);
-
         for (let i = 0; i < count; i++) {
-          const row = document.createElement('tr');
+          const block = document.createElement('div');
+          block.classList.add('shooter-block');
 
-          // Shooter dropdown
-          const shooterCell = document.createElement('td');
-          const select = document.createElement('select');
-          select.name = `shooter-${i}`;
-          
+          const row = document.createElement('div');
+          row.classList.add('shooter-row');
+
+          const shooterSelect = document.createElement('select');
+          shooterSelect.name = `shooter-${i}`;
+          shooterSelect.classList.add('shooter-select');
+
           const blankOption = document.createElement('option');
           blankOption.value = '';
           blankOption.textContent = '';
-          select.appendChild(blankOption);
+          shooterSelect.appendChild(blankOption);
 
           shooters.forEach(name => {
             const option = document.createElement('option');
             option.value = name;
             option.textContent = name;
-            select.appendChild(option);
+            shooterSelect.appendChild(option);
           });
-          shooterCell.appendChild(select);
-          row.appendChild(shooterCell);
 
-          let totalHits = 0;
-          const scoreCells = [];
+          row.appendChild(shooterSelect);
 
+          const scoreButtons = [];
           for (let j = 0; j < 25; j++) {
-            const td = document.createElement('td');
             const btn = document.createElement('button');
             btn.classList.add('score-cell');
-            btn.style.minWidth = '50px';
-            btn.style.minHeight = '50px';
-            btn.style.margin = '6px';
             btn.textContent = '';
             btn.dataset.state = '';
             btn.onclick = () => {
@@ -191,24 +192,22 @@
               }
               updateTotal();
             };
-            td.appendChild(btn);
-            row.appendChild(td);
-            scoreCells.push(btn);
+            row.appendChild(btn);
+            scoreButtons.push(btn);
           }
 
-          const totalCell = document.createElement('td');
-          totalCell.classList.add('total-cell');
-          row.appendChild(totalCell);
+          const totalSpan = document.createElement('span');
+          totalSpan.classList.add('total-display');
+          row.appendChild(totalSpan);
 
           function updateTotal() {
-            const total = scoreCells.filter(btn => btn.dataset.state === 'hit').length;
-            totalCell.textContent = total;
+            const total = scoreButtons.filter(b => b.dataset.state === 'hit').length;
+            totalSpan.textContent = `Total: ${total}`;
           }
 
-          table.appendChild(row);
+          block.appendChild(row);
+          container.appendChild(block);
         }
-
-        container.appendChild(table);
       });
     }
 

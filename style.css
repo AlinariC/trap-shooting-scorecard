@@ -61,11 +61,6 @@ body.dark-theme {
     color: #ccc;
   }
   
-  #scorecardContainer {
-    overflow-x: auto;
-    margin-bottom: 2rem;
-  }
-  
   .shooter-block {
     margin-bottom: 2rem;
     padding: 1rem;
