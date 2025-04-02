@@ -156,11 +156,28 @@ function removeCoach(name) {
   });
 }
 
+function loadRosterList() {
+  const listElement = document.getElementById('shooterList');
+  if (!listElement) return;
+  listElement.innerHTML = '';
+  db.ref('roster').once('value', snapshot => {
+    const list = snapshot.val() || [];
+    list.forEach(name => {
+      const li = document.createElement('li');
+      li.textContent = name;
+      listElement.appendChild(li);
+    });
+  });
+}
+
 window.onload = () => {
   if (document.getElementById('shooterCount')) {
     renderScorecard();
   }
   if (document.getElementById('coachList')) {
     loadCoachList();
+  }
+  if (document.getElementById('shooterList')) {
+    loadRosterList();
   }
 };
