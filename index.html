@@ -150,6 +150,12 @@
           const row = document.createElement('div');
           row.classList.add('shooter-row');
 
+          const header = document.createElement('div');
+          header.classList.add('shooter-select');
+
+          const scoreGrid = document.createElement('div');
+          scoreGrid.classList.add('score-grid');
+
           const shooterSelect = document.createElement('select');
           shooterSelect.name = `shooter-${i}`;
           shooterSelect.classList.add('shooter-select');
@@ -166,7 +172,8 @@
             shooterSelect.appendChild(option);
           });
 
-          row.appendChild(shooterSelect);
+          header.appendChild(shooterSelect);
+          row.appendChild(header);
 
           const scoreButtons = [];
           for (let j = 0; j < 25; j++) {
@@ -192,12 +199,13 @@
               }
               updateTotal();
             };
-            row.appendChild(btn);
+            scoreGrid.appendChild(btn);
             scoreButtons.push(btn);
           }
 
           const totalSpan = document.createElement('span');
           totalSpan.classList.add('total-display');
+          row.appendChild(scoreGrid);
           row.appendChild(totalSpan);
 
           function updateTotal() {
