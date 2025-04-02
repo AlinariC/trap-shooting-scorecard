@@ -149,14 +149,22 @@ body.dark-theme {
   opacity: 1;
 }
 
-button[title="Add Name"] {
-  font-size: 1.5rem;
+.icon-button {
   background: none;
   border: none;
   cursor: pointer;
-  color: #00e676; /* vivid green */
-  transition: transform 0.2s ease-in-out;
   padding: 0.25rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+.icon-button svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+button[title="Add Name"] {
+  color: #00e676; /* vivid green */
 }
 
 button[title="Add Name"]:hover {
@@ -165,13 +173,7 @@ button[title="Add Name"]:hover {
 }
 
 button[title="Remove Name"] {
-  font-size: 1.5rem;
-  background: none;
-  border: none;
-  cursor: pointer;
   color: #ff1744; /* vivid red */
-  transition: transform 0.2s ease-in-out;
-  padding: 0.25rem;
 }
 
 button[title="Remove Name"]:hover {
