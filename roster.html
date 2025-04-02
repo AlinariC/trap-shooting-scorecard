@@ -12,16 +12,14 @@
   <script src="header.js"></script>
   <main>
     <h2>Manage Roster</h2>
-    <div class="controls" style="max-width: 100%;">
-      <label for="newName" style="display: block; margin-bottom: 0.25rem;">Name of new shooter:</label>
-      <div style="display: flex; align-items: center; gap: 0.5rem;">
-        <input type="text" id="newName" style="flex: 1;" />
-        <button onclick="addName()" title="Add Name" class="icon-button">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 5v14m-7-7h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-      </div>
+    <div class="input-wrapper">
+      <label for="newName">Name of new shooter:</label>
+      <input type="text" id="newName" />
+      <button onclick="addName()" title="Add Name" class="icon-button">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+          <path d="M12 5v14m-7-7h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
     </div>
 
     <div id="rosterList" class="shooter-block">
