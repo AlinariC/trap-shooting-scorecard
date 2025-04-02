@@ -93,8 +93,10 @@ function renderScorecard() {
   });
 }
 
-window.onload = () => {
-  document.getElementById('shooterCount').value = '1';
-  renderScorecard();
-  document.getElementById('shooterCount').addEventListener('change', renderScorecard);
-};
+if (document.getElementById('shooterCount')) {
+  window.onload = () => {
+    document.getElementById('shooterCount').value = '1';
+    renderScorecard();
+    document.getElementById('shooterCount').addEventListener('change', renderScorecard);
+  };
+}
