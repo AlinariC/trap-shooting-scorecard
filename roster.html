@@ -69,9 +69,8 @@
               <path fill="#ff3b30" d="M6 19a2 2 0 002 2h8a2 2 0 002-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
             </svg>`;
           removeBtn.classList.add('icon-button');
-          removeBtn.style.marginLeft = '0.5rem';
+          removeBtn.style.cssText = 'margin-left: 0.5rem; vertical-align: middle; display: inline-flex; align-items: center;';
           removeBtn.title = 'Remove Name';
-          removeBtn.removeAttribute('style');
           removeBtn.onclick = () => {
             list.splice(index, 1);
             db.ref('roster').set(list).then(() => {
