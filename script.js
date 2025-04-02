@@ -90,6 +90,56 @@ function removeCoach(name) {
   });
 }
 
+function renderScorecard() {
+  const count = parseInt(document.getElementById('shooterCount').value);
+  const container = document.getElementById('scorecardContainer');
+  container.innerHTML = '';
+
+  for (let i = 0; i < count; i++) {
+    const shooterDiv = document.createElement('div');
+    shooterDiv.classList.add('shooter-entry');
+
+    const nameLabel = document.createElement('label');
+    nameLabel.textContent = `Shooter ${i + 1}:`;
+
+    const nameInput = document.createElement('input');
+    nameInput.type = 'text';
+    nameInput.placeholder = 'Shooter Name';
+
+    const scoreGrid = document.createElement('div');
+    scoreGrid.classList.add('score-grid');
+    for (let j = 0; j < 25; j++) {
+      const cell = document.createElement('button');
+      cell.classList.add('score-cell');
+      cell.textContent = '';
+      cell.dataset.state = '';
+      cell.onclick = () => {
+        if (cell.dataset.state === '') {
+          cell.textContent = '/';
+          cell.dataset.state = 'hit';
+          cell.classList.add('hit');
+          cell.classList.remove('miss');
+        } else if (cell.dataset.state === 'hit') {
+          cell.textContent = 'O';
+          cell.dataset.state = 'miss';
+          cell.classList.add('miss');
+          cell.classList.remove('hit');
+        } else {
+          cell.textContent = '';
+          cell.dataset.state = '';
+          cell.classList.remove('hit', 'miss');
+        }
+      };
+      scoreGrid.appendChild(cell);
+    }
+
+    shooterDiv.appendChild(nameLabel);
+    shooterDiv.appendChild(nameInput);
+    shooterDiv.appendChild(scoreGrid);
+    container.appendChild(shooterDiv);
+  }
+}
+
 window.onload = () => {
   if (document.getElementById('shooterList')) {
     loadRosterList();
