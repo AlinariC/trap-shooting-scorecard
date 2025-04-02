@@ -157,6 +157,10 @@ function removeCoach(name) {
 }
 
 window.onload = () => {
-  renderScorecard();
-  loadCoachList();
+  if (document.getElementById('shooterCount')) {
+    renderScorecard();
+  }
+  if (document.getElementById('coachList')) {
+    loadCoachList();
+  }
 };
