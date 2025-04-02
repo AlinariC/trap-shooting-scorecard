@@ -160,23 +160,24 @@ body.dark-theme {
 .icon-button svg {
   width: 24px;
   height: 24px;
+  color: inherit;
   fill: currentColor;
 }
 
 button[title="Add Name"] {
-  color: #00e676; /* vivid green */
+  color: #00ff66; /* bright green */
 }
 
 button[title="Add Name"]:hover {
   transform: scale(1.2);
-  color: #69f0ae;
+  color: #66ff99;
 }
 
 button[title="Remove Name"] {
-  color: #ff1744; /* vivid red */
+  color: #ff3b30; /* bright red */
 }
 
 button[title="Remove Name"]:hover {
   transform: scale(1.2);
-  color: #ff8a80;
+  color: #ff7b72;
 }
