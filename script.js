@@ -43,8 +43,9 @@ function renderScorecard() {
         const td = document.createElement('td');
         const btn = document.createElement('button');
         btn.classList.add('score-cell');
-        btn.style.minWidth = '32px';
-        btn.style.minHeight = '32px';
+        btn.style.minWidth = '50px';
+        btn.style.minHeight = '50px';
+        btn.style.margin = '6px';
         btn.textContent = '';
         btn.dataset.state = '';
         btn.onclick = () => {
@@ -85,3 +86,9 @@ function renderScorecard() {
     container.appendChild(table);
   });
 }
+
+window.onload = () => {
+  document.getElementById('shooterCount').value = '1';
+  renderScorecard();
+  document.getElementById('shooterCount').addEventListener('change', renderScorecard);
+};

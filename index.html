@@ -26,7 +26,7 @@
         <input type="text" id="teamName" />
       </label>
       <label>Shooters:
-          <select id="shooterCount" onchange="renderScorecard()">
+          <select id="shooterCount">
           <option value="1">1 Shooter</option>
           <option value="2">2 Shooters</option>
           <option value="3">3 Shooters</option>
@@ -107,8 +107,9 @@
             const td = document.createElement('td');
             const btn = document.createElement('button');
             btn.classList.add('score-cell');
-            btn.style.minWidth = '32px';
-            btn.style.minHeight = '32px';
+            btn.style.minWidth = '50px';
+            btn.style.minHeight = '50px';
+            btn.style.margin = '6px';
             btn.textContent = '';
             btn.dataset.state = '';
             btn.onclick = () => {
@@ -149,6 +150,12 @@
         container.appendChild(table);
       });
     }
+
+    window.onload = () => {
+      document.getElementById('shooterCount').value = '1';
+      renderScorecard();
+      document.getElementById('shooterCount').addEventListener('change', renderScorecard);
+    };
   </script>
   
   <script src="script.js"></script>
