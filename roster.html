@@ -123,6 +123,9 @@
 
     window.onload = () => {
       loadRosterList();
+      if (typeof loadCoachList === 'function') {
+        loadCoachList();
+      }
       setTimeout(() => showToast("✓ Toast working"), 500);
     };
   </script>
